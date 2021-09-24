@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 
 const TextInput = ({ style, name, onChange, onBlur, showError, ...props }) => {
   const textInputStyle = [styles.input, style, showError && styles.error];
-  console.log(props);
 
   return <NativeTextInput style={textInputStyle} onChangeText={onChange(name)} onBlur={onBlur(name)} {...props} />;
 };
