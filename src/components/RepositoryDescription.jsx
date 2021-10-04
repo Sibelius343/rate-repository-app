@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 const RepositoryDescription = ({ fullName, description, language }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.item} fontWeight='bold' fontSize='subHeading'>{fullName}</Text>
-      <Text style={[styles.item, {marginBottom: 3}]} color='textSecondary'>{description}</Text>
-      <Language style={styles.item} language={language} />
+      <Text style={styles.item} fontWeight='bold' fontSize='subHeading' testID='fullName'>{fullName}</Text>
+      <Text style={[styles.item, {marginBottom: 3}]} color='textSecondary' testID='description'>{description}</Text>
+      <Language style={styles.item} language={language} testID='language' />
     </View>
   );
 };

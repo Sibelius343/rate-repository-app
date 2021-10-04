@@ -2,10 +2,10 @@ import React from "react";
 import { View } from "react-native";
 import Text from "./Text";
 
-const Metric = ({ value, label }) => {
+const Metric = ({ value, label, testID }) => {
   return (
     <View>
-      <Text fontWeight='bold'>{value}</Text>
+      <Text fontWeight='bold' testID={testID}>{value}</Text>
       <Text>{label}</Text>
     </View>
   );

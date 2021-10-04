@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
 const RepositoryMetrics = ({ stars, forks, reviews, rating, style }) => {
   return (
     <View style={[styles.container, style]}>
-      <Metric value={stars} label='Stars' />
-      <Metric value={forks} label='Forks' />
-      <Metric value={reviews} label='Reviews' />
-      <Metric value={rating} label='Rating' />
+      <Metric value={stars} label='Stars' testID='stars' />
+      <Metric value={forks} label='Forks' testID='forks' />
+      <Metric value={reviews} label='Reviews' testID='reviews' />
+      <Metric value={rating} label='Rating' testID='rating' />
     </View>
   );
 };

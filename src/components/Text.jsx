@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: theme.fontWeights.fontWeightBold
+  },
+  medium: {
+    fontWeight: theme.fontWeights.fontWeightMedium
   }
 });
 
@@ -31,6 +34,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === 'primary' && styles.colorPrimary,
     fontSize === 'subHeading' && styles.subHeading,
     fontWeight === 'bold' && styles.bold,
+    fontWeight === 'medium' && styles.medium,
     style
   ];
 

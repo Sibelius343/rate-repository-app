@@ -1,17 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Pressable } from 'react-native';
+import { useHistory } from "react-router-native";
 import RepositoryDescription from "./RepositoryDescription";
 import RepositoryMetrics from "./RepositoryMetrics";
+import CustomButton from "./CustomButton";
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    padding: 5
   },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 5,
   },
   image: {
     width: 40,
@@ -24,7 +26,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const RepositoryItem = ({ item: { fullName, description, language, stargazersCount, forksCount, reviewCount, ratingAverage, ownerAvatarUrl }}) => {
+const RepositoryItem = ({ item: { fullName, description, language, stargazersCount, forksCount, reviewCount, ratingAverage, ownerAvatarUrl, id }, repoButton, onPress }) => {
+  const history = useHistory();
   const parseCount = (number) => {
     if (number < 1000) {
       return number;
@@ -36,29 +39,39 @@ const RepositoryItem = ({ item: { fullName, description, language, stargazersCou
     return `${count}k`;
   };
 
+  const clickForSingleView = repoButton
+    ? null
+    : () => history.push(`/repo/${id}`);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: ownerAvatarUrl
-          }}
+    <Pressable onPress={clickForSingleView}>
+      <View style={styles.container} testID='repositoryItem' >
+        <View style={styles.topContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: ownerAvatarUrl
+            }}
+          />
+          <RepositoryDescription
+            fullName={fullName}
+            description={description}
+            language={language}
+          />
+        </View>
+        <RepositoryMetrics
+          stars={parseCount(stargazersCount)}
+          forks={parseCount(forksCount)}
+          reviews={parseCount(reviewCount)}
+          rating={ratingAverage}
+          style={styles.metrics}
         />
-        <RepositoryDescription
-          fullName={fullName}
-          description={description}
-          language={language}
-        />
+        {repoButton && <CustomButton
+          onPress={onPress}
+          text='Open in Github'
+        />}
       </View>
-      <RepositoryMetrics
-        stars={parseCount(stargazersCount)}
-        forks={parseCount(forksCount)}
-        reviews={parseCount(reviewCount)}
-        rating={ratingAverage}
-        style={styles.metrics}
-      />
-    </View>
+    </Pressable>
   );
 };
 
